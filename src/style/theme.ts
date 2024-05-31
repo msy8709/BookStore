@@ -1,10 +1,10 @@
-export type ThemeName = "light" | "dark"
-type ColorKey = "primary"|"background"|"secondary"|"third"
+export type ThemeName = "light" | "dark";
+type ColorKey = "primary"|"background"|"secondary"|"third";
 
 
 
 interface Theme{
-    name: string;
+    name: ThemeName;
     color: Record<ColorKey, string>;
 }
 
@@ -27,3 +27,12 @@ export const dark: Theme = {
         third: "darkgreen"
     },
 };
+
+export const getTheme = (themeName: ThemeName) : Theme => {
+    switch (themeName) {
+        case "light":
+            return light;
+        case "dark":
+            return dark;
+    }
+}

@@ -8,6 +8,7 @@ import ThemeSwitcher from './components/Header/ThemeSwitcher';
 import { BookStoreThemeProvider, ThemeContext } from './context/themeContext';
 import { RouterProvider, createBrowserRouter } from 'react-router-dom';
 import Error from './components/common/Error';
+import Signup from './pages/Signup';
 
 const router = createBrowserRouter([
   {
@@ -17,11 +18,11 @@ const router = createBrowserRouter([
   },
   {
     path: "/books",
-    element: <div>도서 목록</div>
+    element: <Layout><div>도서 목록</div></Layout>
   },
   {
     path: "/signup",
-    element: <div>회원가입</div>
+    element: <Layout><Signup/></Layout>
   }
 
 ])
@@ -30,9 +31,9 @@ function App() {
   return (
     <>
     <BookStoreThemeProvider>
-          <Layout>
+        
             <RouterProvider router={router} />
-          </Layout>
+          
     </BookStoreThemeProvider>
     </>
   )

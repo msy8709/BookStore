@@ -18,7 +18,12 @@ const router = createBrowserRouter([
   {
     path: "/books",
     element: <div>도서 목록</div>
+  },
+  {
+    path: "/signup",
+    element: <div>회원가입</div>
   }
+
 ])
 function App() {
 

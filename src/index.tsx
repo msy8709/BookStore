@@ -2,7 +2,6 @@ import React from 'react';
 import ReactDOM from 'react-dom/client';
 import App from './App';
 import reportWebVitals from './reportWebVitals';
-import { GlobalStyle } from './style/global';
 import { ThemeContext, state } from './context/themeContext';
 const root = ReactDOM.createRoot(
   document.getElementById('root') as HTMLElement

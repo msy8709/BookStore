@@ -2,6 +2,7 @@ import React from 'react';
 import styled from 'styled-components';
 import ThemeSwitcher from '../Header/ThemeSwitcher';
 import {FaSignInAlt, FaRegUser} from "react-icons/fa";
+import { Link } from 'react-router-dom';
 const Header = () => {
     const CATEGORY = [
         {
@@ -25,14 +26,16 @@ const Header = () => {
         
        <HeaderStyle>
         <h1 className='logo'>
-            <img src="" alt=""/>
+            <Link to="/">
+                <img src="" alt="book store"/>
+            </Link>
         </h1>
         <nav className='category'>
             <ul>
                 {
                     CATEGORY.map((item) => (
                         <li key={item.id}>
-                            <a href={item.id === null ? '/books' : `/books?category_id=${item.id}`}>{item.name}</a>
+                            <Link to={item.id === null ? '/books' : `/books?category_id=${item.id}`}>{item.name}</Link>
                         </li>
                     ))
                 }

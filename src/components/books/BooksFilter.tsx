@@ -12,9 +12,9 @@ const BooksFilter = () => {
     const handleCategory = (id: number| null) => {
         const newSearchParams = new URLSearchParams(searchParams);
         if(id ===null) {
-            newSearchParams.delete('category_id');
+            newSearchParams.delete('QUERYSTRING.CATEGORY_ID');
         }else{
-            newSearchParams.set('category_id', id.toString());
+            newSearchParams.set('QUERYSTRING.CATEGORY_ID', id.toString());
         }
 
         setSearchParams(newSearchParams)
@@ -23,10 +23,10 @@ const BooksFilter = () => {
     const handleNews = () => {
         const newSearchParams = new URLSearchParams(searchParams);
 
-        if(newSearchParams.get('news')){
-            newSearchParams.delete('news');
+        if(newSearchParams.get('QUERYSTRING.NEWS')){
+            newSearchParams.delete('QUERYSTRING.NEWS');
         }else{
-            newSearchParams.set("news", "true")
+            newSearchParams.set("QUERYSTRING.NEWS", "true")
         }
         setSearchParams(newSearchParams)
     }

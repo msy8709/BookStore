@@ -16,7 +16,7 @@ export const createClient = (config?: AxiosRequestConfig) => {
         withCredentials: true,
         ...config,
     });
-    const navigate = useNavigate();
+   
     axiosInstance.interceptors.response.use(
         (response) => {
         return response;
@@ -25,6 +25,7 @@ export const createClient = (config?: AxiosRequestConfig) => {
             
             //로그인 만료 처리
             if (error.response.status === 401) {
+                const navigate = useNavigate();
                 removeToken();
                 window.location.href = "/login";
                 navigate('/')

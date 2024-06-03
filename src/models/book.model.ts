@@ -4,7 +4,7 @@ export interface Book{
     id: number;
     title: string;
     img: number;
-    categroy_id: number;
+    category_id: number;
     form:string;
     isbn:string;
     summary:string;

@@ -9,6 +9,7 @@ import { BookStoreThemeProvider, ThemeContext } from './context/themeContext';
 import { RouterProvider, createBrowserRouter } from 'react-router-dom';
 import Error from './components/common/Error';
 import Signup from './pages/Signup';
+import ResetPassword from './pages/ResetPassword';
 
 const router = createBrowserRouter([
   {
@@ -23,6 +24,10 @@ const router = createBrowserRouter([
   {
     path: "/signup",
     element: <Layout><Signup/></Layout>
+  },
+  {
+    path: "/reset",
+    element: <Layout><ResetPassword/></Layout>
   }
 
 ])

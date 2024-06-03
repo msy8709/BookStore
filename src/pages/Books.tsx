@@ -13,8 +13,11 @@ const Books = () => {
         <div>
             <Title size="large">도서 검색 결과</Title>
             <BooksStyle>
-                <BooksFilter />
-                <BooksSwitcher />
+                <div className='filter'>
+                    <BooksFilter />
+                    <BooksSwitcher />
+                </div>
+                
                 {!isEmpty &&<BooksList books = {books}/>}
                 {isEmpty && <BooksEmpty/>}
                 {!isEmpty && <Pagination />}
@@ -23,6 +26,18 @@ const Books = () => {
         </div>
     );
 };
-const BooksStyle = styled.div``
+const BooksStyle = styled.div`
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
+    gap: 24px;
+
+    .filter{
+        display: flex;
+        justify-content: space-between;
+        align-items: center;
+        padding: 20px 0;
+    }
+`
 
 export default Books;

@@ -6,11 +6,11 @@ import { Link } from 'react-router-dom';
 import { Category } from '../../models/category.model';
 import { fetchCategory } from '../../api/category.api';
 import { useCategory } from '../../hooks/useCategory';
-
+import { useAuthStore } from '../../store/authStore';
 
 
 const Header = () =>{
-    
+    const {isloggedIn, storeLogout} = useAuthStore();
     const {category} = useCategory();
     return (
         
@@ -32,14 +32,33 @@ const Header = () =>{
             </ul>
         </nav>
             <nav className="auth">
-                <ul>
-                    <li>
-                        <FaSignInAlt>로그인</FaSignInAlt>
-                    </li>
-                    <li>
-                        <FaRegUser>회원가입</FaRegUser>
-                    </li>
-                </ul>
+                {
+                    isloggedIn && (
+                        <ul>
+                            <li><Link to="/cart">장바구니</Link></li>
+                            <li><Link to="/orderlist">주문 내역</Link></li>
+                            <li><button onClick={storeLogout}>로그아웃</button></li>
+                        </ul>
+                    )
+                }
+                {
+                    !isloggedIn && (
+                    <ul>
+                        <li>
+                            <Link to="/login">
+                                <FaSignInAlt>로그인</FaSignInAlt>
+                            </Link>
+                            
+                        </li>
+                        <li>
+                            <Link to="signup">
+                                <FaRegUser>회원가입</FaRegUser>
+                            </Link>
+                        </li>
+                    </ul>
+                    )
+                }
+                
             </nav>
        </HeaderStyle>
        
@@ -85,13 +104,16 @@ const HeaderStyle = styled.header`
             display: flex;
             gap: 16px;
             li{
-                a{
+                a, button{
                     font-size: 1rem;
                     font-weight: 600;
                     text-decoration: none;
                     display: flex;
                     align-item: center;
                     line-height: 1;
+                    background: none;
+                    border:0;
+                    cursor: pointer;
                     svg{
                         margin-right: 6px;
                     }

@@ -26,7 +26,9 @@ const CartItem = ({cart, checkedItems,onCheck, onDelete} : Props) => {
     }
 
     const handleDelete = () => {
-
+        showConfirm("정말 삭제하시겠습니까?", () => {
+            onDelete(cart.id);
+        })
         onDelete(cart.id)
     }
     return (

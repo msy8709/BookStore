@@ -34,7 +34,7 @@ const CartItem = ({cart, checkedItems,onCheck, onDelete} : Props) => {
     return (
         <CartItemStyle>
             <div className="info">
-                <div>
+                <div className='check'>
                     <CheckIconButton isChecked={isChecked} onCheck={handleCheck}/>
                 </div>
                 <div>
@@ -58,10 +58,20 @@ const CartItemStyle = styled.div`
     border: 1px solid ${({theme}) => theme.color.border};
     border-radius: ${({theme}) => theme.borderRadius.default};
     padding:12px;
-
-    p{
-        padding: 0 0 8px 0;
-        margin: 0;
+    .info{
+        display: flex;
+        align-items: start;
+        flex: 1;
+        .check{
+            width: 24px;
+            flex-shrink: 0;
+        }
+        
+        p{
+            padding: 0 0 8px 0;
+            margin: 0;
+        }
     }
+    
 `;
 export default CartItem;

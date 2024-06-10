@@ -19,3 +19,9 @@ export interface OrderSheet {
         contact: string;
     }
 }
+
+export interface Delivery{
+    address: string;
+    receiver: string;
+    contact: string;
+}

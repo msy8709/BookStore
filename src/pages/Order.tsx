@@ -1,5 +1,5 @@
 import React from 'react';
-import { useLoaderData, useLocation } from 'react-router-dom';
+import { useLoaderData, useLocation, useNavigate } from 'react-router-dom';
 import styled from 'styled-components';
 import Title from '../components/common/Title';
 import { CartStyles } from './Cart';
@@ -8,18 +8,20 @@ import Button from '../components/common/Button';
 import InputText from '../components/common/InputText';
 import { useForm } from 'react-hook-form';
 import { Delivery, OrderSheet } from '../models/order.modal';
-
-
+import FindAddressButton from '../components/order/FindAddressButton';
+import { order } from '../api/order.api';
+import { useAlert } from '../hooks/useAlert';
 interface DeliveryForm extends Delivery{
     addressDetail: string;
 }
 const Order = () => {
     const location = useLocation();
     const orderDataFromCart = location.state;
-
+    const navigate = useNavigate();
+    const {showAlert, showConfirm} = useAlert();
     const {totalQuantity, totalPrice, firstBookTitle} = orderDataFromCart;
 
-    const {register, handleSubmit, formState: {errors},} = useForm<DeliveryForm>();
+    const {register, setValue,handleSubmit, formState: {errors},} = useForm<DeliveryForm>();
 
     const handlePay = (data: DeliveryForm) => {
         const orderData: OrderSheet = {
@@ -30,6 +32,12 @@ const Order = () => {
 
             }
         }
+        showConfirm("주문을 진행하시겠습니까?", () => {
+            order(orderData).then(() => {
+                showAlert("주문이 처리되었습니다.");
+                navigate("/ordrelist")
+            })
+        })
     }
     return (
         <>
@@ -45,9 +53,7 @@ const Order = () => {
                             <div className='input'>
                                 <InputText inputType='text' {...register("addressDetail", {required:true})}/>
                             </div>
-                            <Button size='medium' scheme='normal'>
-                                주소찾기
-                            </Button>
+                            <FindAddressButton onCompleted={(address)=> setValue("address", address)} />
                         </fieldset>
                         {errors.address && <p className='error-text'>주소를 입력해주세요.</p>}
                         <fieldset>

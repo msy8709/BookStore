@@ -15,6 +15,7 @@ import Books from './pages/Books';
 import BookDetail from './pages/BookDetail';
 import Cart from './pages/Cart';
 import Order from './pages/Order';
+import OrderList from './pages/OrderList';
 
 const router = createBrowserRouter([
   {
@@ -49,6 +50,10 @@ const router = createBrowserRouter([
   {
     path: "/order",
     element: <Layout><Order/></Layout>
+  },
+  {
+    path: "/orderlist",
+    element: <Layout><OrderList/></Layout>
   },
 
 

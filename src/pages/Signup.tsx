@@ -8,6 +8,7 @@ import {useForm} from "react-hook-form";
 import { signup } from '../api/auth.api';
 import { useNavigate } from 'react-router-dom';
 import { useAlert } from '../hooks/useAlert';
+import { useAuth } from '@/hooks/useAuth';
 
 export interface SignupProps {
     email: string;
@@ -17,7 +18,7 @@ export interface SignupProps {
 const Signup = () => {
     const navigate = useNavigate();
     const {showAlert} = useAlert();
-
+    const {userSignup} = useAuth();
     // const [email, setEmail] = useState("");
     // const [password, setPassword] = useState("");
 
@@ -29,10 +30,7 @@ const Signup = () => {
     const {register, handleSubmit, formState: {errors},} = useForm<SignupProps>();
 
     const onsubmit = (data: SignupProps) => {
-        signup(data).then((res) => {
-            showAlert('회원가입이 완료되었습니다.');
-            navigate("/login");
-        })
+        userSignup(data)
     }
     return (
         <>

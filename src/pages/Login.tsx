@@ -10,6 +10,7 @@ import { useNavigate } from 'react-router-dom';
 import { useAlert } from '../hooks/useAlert';
 import { SignupStyle } from './Signup';
 import { useAuthStore } from '../store/authStore';
+import { useAuth } from '@/hooks/useAuth';
 export interface SignupProps {
     email: string;
     password: string;
@@ -18,21 +19,12 @@ export interface SignupProps {
 const Login = () => {
     const navigate = useNavigate();
     const {showAlert} = useAlert();
-
+    const {userLogin} = useAuth();
     const {isloggedIn, storeLogin, storeLogout} = useAuthStore();
     const {register, handleSubmit, formState: {errors},} = useForm<SignupProps>();
 
     const onsubmit = (data: SignupProps) => {
-        
-        login(data).then((res) => {
-            storeLogin(res.token);
-            showAlert('로그인이 완료되었습니다.');
-            navigate("/");
-        },
-        (error) => {
-            showAlert("로그인이 실패했습니다.")
-        }
-    )
+        userLogin(data)
     }
     return (
         <>

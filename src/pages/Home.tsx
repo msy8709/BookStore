@@ -1,21 +1,15 @@
 import React from 'react';
-import Header from '../components/common/Header';
-import { formatNumber } from '../utils/format';
-import Title from '../components/common/Title';
-import Button from '../components/common/Button';
+import styled from 'styled-components';
 
-const Home = () => {
-
-    const Count =10000
+const $1 = () => {
     return (
-        <div>
-            <Title size="large">제목 테스트</Title>
-            <div>home body</div>
-            <Button size='large' scheme='normal'>
-                버튼 테스트
-            </Button>
-        </div>
+        <$1Style>
+
+        </$1Style>
     );
 };
 
-export default Home;
+const $1Style = styled.div`
+    
+`;
+export default $1;

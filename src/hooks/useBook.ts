@@ -1,5 +1,5 @@
 import { useEffect, useState } from "react"
-import { BookDetail } from "../models/book.model";
+import { BookDetail, BookReviewItem } from "../models/book.model";
 import { fetchBook, likeBook, unlikeBook } from "../api/books.api";
 import { useAuthStore } from "../store/authStore";
 import { useAlert } from "./useAlert";
@@ -10,6 +10,7 @@ export const useBook = (bookId: string | undefined) => {
     const { isloggedIn} = useAuthStore();
     const {showAlert} = useAlert();
     const [cartAdded, setCartAdded] = useState(false);
+    const [reviews, setReviews] = useState<BookReviewItem[]>([])
     const likeToggle = () => {
         if( !isloggedIn){
             alert('로그인이 필요합니다.');

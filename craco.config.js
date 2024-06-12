@@ -1,4 +1,4 @@
-const plugin = require("craco-alias");
+
 const cracoAlias = require("craco-alias");
 
 module.exports = {

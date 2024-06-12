@@ -25,7 +25,7 @@ const LoadingStyle = styled.div`
         width: 70px;
         height: 70px;
         fill: #ccc;
-        animation: rotate 1s linear infinite;
+        animation: rotate 2.5s linear infinite;
     }
 `
 export default Loading;

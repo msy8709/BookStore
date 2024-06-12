@@ -1,10 +1,10 @@
 import { useEffect, useState } from "react"
 
-import { Order } from "../models/order.modal"
+import { Order, OrderListItem } from "../models/order.modal"
 import { fetchOrder, fetchOrders, order } from "../api/order.api";
 
 export const useOrders = () => {
-    const [orders, setOrders] = useState<Order[]>([]);
+    const [orders, setOrders] = useState<OrderListItem[]>([]);
     const [selectedItemId, setSelectedItemId] = useState<number|null>(null);
     useEffect(() => {
         fetchOrders().then((orders) => {

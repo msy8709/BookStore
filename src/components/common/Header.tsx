@@ -1,12 +1,13 @@
 import React, { useEffect, useState } from 'react';
 import styled from 'styled-components';
 import ThemeSwitcher from '../Header/ThemeSwitcher';
-import {FaSignInAlt, FaRegUser} from "react-icons/fa";
+import {FaSignInAlt, FaRegUser, FaUserCircle} from "react-icons/fa";
 import { Link } from 'react-router-dom';
 import { Category } from '../../models/category.model';
 import { fetchCategory } from '../../api/category.api';
 import { useCategory } from '../../hooks/useCategory';
 import { useAuthStore } from '../../store/authStore';
+import DropDown from './DropDown';
 
 
 const Header = () =>{
@@ -32,32 +33,38 @@ const Header = () =>{
             </ul>
         </nav>
             <nav className="auth">
-                {
-                    isloggedIn && (
-                        <ul>
-                            <li><Link to="/cart">장바구니</Link></li>
-                            <li><Link to="/orderlist">주문 내역</Link></li>
-                            <li><button onClick={storeLogout}>로그아웃</button></li>
-                        </ul>
-                    )
-                }
-                {
-                    !isloggedIn && (
-                    <ul>
-                        <li>
-                            <Link to="/login">
-                                <FaSignInAlt>로그인</FaSignInAlt>
-                            </Link>
-                            
-                        </li>
-                        <li>
-                            <Link to="signup">
-                                <FaRegUser>회원가입</FaRegUser>
-                            </Link>
-                        </li>
-                    </ul>
-                    )
-                }
+                <DropDown toggleButton={<FaUserCircle />}>
+                    <>
+                        {
+                        isloggedIn && (
+                            <ul>
+                                <li><Link to="/cart">장바구니</Link></li>
+                                <li><Link to="/orderlist">주문 내역</Link></li>
+                                <li><button onClick={storeLogout}>로그아웃</button></li>
+                            </ul>
+                        )
+                        }
+                        {
+                            !isloggedIn && (
+                            <ul>
+                                <li>
+                                    <Link to="/login">
+                                        <FaSignInAlt>로그인</FaSignInAlt>
+                                    </Link>
+                                    
+                                </li>
+                                <li>
+                                    <Link to="signup">
+                                        <FaRegUser>회원가입</FaRegUser>
+                                    </Link>
+                                </li>
+                            </ul>
+                            )
+                        }
+                        <ThemeSwitcher />
+                    </>
+                </DropDown>
+                
                 
             </nav>
        </HeaderStyle>
@@ -84,7 +91,9 @@ const HeaderStyle = styled.header`
     .category{
         ul{
             display: flex;
+            flex-direction: column;
             gap: 32px;
+            width: 100px;
             li{
                 a{
                     font-size: 1.5rem;
@@ -110,6 +119,8 @@ const HeaderStyle = styled.header`
                     text-decoration: none;
                     display: flex;
                     align-item: center;
+                    justify-content: center;
+                    width: 100%;
                     line-height: 1;
                     background: none;
                     border:0;

@@ -1,4 +1,4 @@
-import React from 'react';
+import React, { useEffect, useRef } from 'react';
 import styled from 'styled-components';
 import Title from '../components/common/Title';
 import BooksFilter from '../components/books/BooksFilter';
@@ -10,14 +10,42 @@ import { useBooks } from '../hooks/useBooks';
 import Loading from '@/components/common/Loading';
 import { useBooksInfinite } from '@/hooks/useBooksInfinite';
 import Button from '@/components/common/Button';
+import { useIntersectionObserver } from '@/hooks/useIntersectionObserver';
 const Books = () => {
-    const {books, Pagination, isEmpty, isBooksLoading} = useBooks();
-    const {fetchNextPage, hasNextPage} = useBooksInfinite();
+    
+    const {books, pagination, isEmpty, isBooksLoading,fetchNextPage, hasNextPage} = useBooksInfinite();
     if (isEmpty) {
         return <BooksEmpty />;
     }
 
-    if (!books || !Pagination || isBooksLoading){
+    // const moreRef = useRef(null);
+    // useEffect(() => {
+    //     const observer = new IntersectionObserver((entries) => {
+    //         entries.forEach((entry) => {
+    //             if(entry.isIntersecting) {
+    //                 loadMore();
+    //                 observer.unobserve(entry.target)
+    //             }
+    //         })
+    //     })
+    //     if(moreRef.current){
+    //         observer.observe(moreRef.current)
+    //     }
+
+    //     return () => observer.disconnect();
+    // }, [books, moreRef])
+
+    const moreRef = useIntersectionObserver(([entry]) => {
+        if(entry.isIntersecting) {
+            loadMore();
+        }
+    });
+
+    const loadMore = () => {
+        if(!hasNextPage) return;
+        fetchNextPage();
+    }
+    if (!books || !pagination || isBooksLoading){
         return <Loading />
     }
     return (

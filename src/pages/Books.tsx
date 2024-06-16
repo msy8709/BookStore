@@ -8,9 +8,11 @@ import Ppagination from '@/components/books/Pagination';
 import BooksSwitcher from '../components/books/BooksViewSwitcher';
 import { useBooks } from '../hooks/useBooks';
 import Loading from '@/components/common/Loading';
+import { useBooksInfinite } from '@/hooks/useBooksInfinite';
+import Button from '@/components/common/Button';
 const Books = () => {
     const {books, Pagination, isEmpty, isBooksLoading} = useBooks();
-
+    const {fetchNextPage, hasNextPage} = useBooksInfinite();
     if (isEmpty) {
         return <BooksEmpty />;
     }
@@ -28,7 +30,10 @@ const Books = () => {
                 </div>
             
                 <BooksList books = {books}/>
-                <Ppagination pagination={Pagination}/>
+                {/* <Ppagination pagination={Pagination}/> */}
+                <div className="more">
+                    <Button size="medium" scheme='normal' onClick={() => fetchNextPage()} disabled={!hasNextPage}>{hasNextPage ?  "더보기" : "마지막 페이지"}</Button>
+                </div>
             </BooksStyle>
         </div>
     );
